@@ -28,3 +28,20 @@ class AlphabetController < UIViewController
     cell
   end
 
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated:true)
+    letter = sections[indexPath.section]
+
+    controller = UIViewController.alloc.initWithNibName(nil, bundle:nil)
+    controller.view.backgroundColor = UIColor.whiteColor
+    controller.title = letter
+
+    label = UILabel.alloc.initWithFrame(CGRectZero)
+    label.text = row_for_index_path(indexPath)
+    label.sizeToFit
+    label.center = [controller.view.frame.size.width / 2,
+                    controller.view.frame.size.height / 2 ]
+    controller.view.addSubview(label)
+    self.navigationController.pushViewController(controller, animated: true)
+  end
+
