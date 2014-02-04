@@ -45,3 +45,23 @@ class AlphabetController < UIViewController
     self.navigationController.pushViewController(controller, animated: true)
   end
 
+  def sections
+    @data.keys.sort
+  end
+
+  def rows_for_section(section_index)
+    @data[self.sections[section_index]]
+  end
+
+  def row_for_index_path(index_path)
+    rows_for_section(index_path.section)[index_path.row]
+  end
+
+  def numberOfSectionsInTableView(tableView)
+    self.sections.count
+  end
+
+  def tableView(tableView, titleForHeaderInSection:section)
+    sections[section]
+  end
+end
